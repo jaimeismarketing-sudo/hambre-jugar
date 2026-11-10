@@ -1,10 +1,10 @@
 {
   "product": "RAPPER SIM: HAMBRE",
-  "version": "1.2.3-god-fame",
+  "version": "1.2.4-save-recovery",
   "target": "github-pages-static",
-  "sourceHash": "ae1e7754375ad1efbad621f8f134a8ae08c4f99f2e0548b1c0be93f2f7b6b16a",
+  "sourceHash": "565944efdf37e6fcaa645a803d9547ca6d9fed1ce43782b57241a80436eaeee3",
   "sourceFileCount": 91,
-  "sourceBytes": 2580866,
+  "sourceBytes": 2581786,
   "storage": "localStorage",
   "storageKey": "rapsim_hambre_v1",
   "serverRequired": false,
@@ -48,8 +48,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 155396,
-      "sha256": "adfc69e57b5d88565038ea693c14d9ab9152ecbebac2fe54b260b245b1440c32"
+      "bytes": 155921,
+      "sha256": "3027fcd67f65b321c576bb92c0818898f955b7a1a7086ea215489df39e26850e"
     },
     {
       "path": "art.js",
@@ -228,8 +228,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 7818,
-      "sha256": "2382d37eace66f2423d8fb2089921555950bc76cb80d2dc005e192faac003743"
+      "bytes": 8213,
+      "sha256": "6a419b633e54c540954025f3b7a3797fb007653258410157fc8f4e96bc43df91"
     },
     {
       "path": "industry-view.css",
