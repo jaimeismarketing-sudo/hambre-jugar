@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HAMBRE">
+  <meta name="theme-color" content="#191623">
+  <meta name="description" content="RAPPER SIM: HAMBRE. Empieza tu carrera desde cero en LATAM. Crea música, forma tu sello y dirige tu carrera en vivo.">
+  <title>RAPPER SIM: HAMBRE</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="game-ui.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="music-lab.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="creator.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="sales-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="activity-actor.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="activity-scene.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="live-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="industry-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="charts-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="cockpit-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="bands-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="game-shell.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="management-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="themes.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="manager-cockpit.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="hubs.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="taxes-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="collaboration-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="album-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="marketing-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="wardrobe.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="career-journey.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="territories-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="enterprise-view.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="live-career.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="mobile-safari.css?v=1.2.3-god-fame">
+  <link rel="stylesheet" href="patrimony-art.css?v=1.2.3-god-fame">
+</head>
+<body>
+  <a class="skip" href="#main">Ir al juego</a>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#central" aria-label="Rapper Sim, inicio"><span class="brand-mark">R<span>✳</span></span><span>RAPPER SIM<small>H A M B R E</small></span></a>
+    <div class="save-tag"><span class="live-dot"></span><span id="save-label">Carrera S1</span><span class="hard">Difícil</span></div>
+    <nav id="nav" aria-label="Secciones del juego"></nav>
+    <div class="sidebar-bottom"><button class="plain" data-ui="save"><span>↧</span> Exportar partida</button><button class="plain" data-nav="archive"><span>▤</span> Archivo y reglas</button><div class="save-status" id="save-status">Guardado en este navegador</div></div>
+    <div class="mini-profile" id="mini-profile"></div>
+  </aside>
+  <div class="app">
+    <header class="topbar"><button class="mobile-menu icon-btn" data-ui="menu" aria-label="Abrir navegación">☰</button><div class="breadcrumb">Tu carrera <span>/</span> <strong id="crumb">Tu semana</strong></div><div class="top-actions"><span class="week-badge" id="week-badge">S1</span><button class="icon-btn" data-nav="archive" aria-label="Reglas y fuentes">?</button><button class="outline small" data-ui="saves">Mis partidas</button></div></header>
+    <section id="simulation-clock" class="simulation-clock" aria-label="Calendario y velocidad"></section>
+    <aside id="storage-notice" class="storage-notice" role="alert" hidden><strong>La última jugada aún no se pudo guardar.</strong><span>No se pudo escribir la copia local. Exporta tus partidas antes de cerrar el juego.</span><button class="outline small" data-ui="save">Exportar todas mis partidas</button></aside>
+    <aside id="activity-dock" aria-label="Tu artista hoy" hidden></aside>
+    <main id="main" tabindex="-1"></main>
+    <footer>El éxito se construye. El tiempo, por sí solo, no lo compra.<span>RAPPER SIM: HAMBRE · En desarrollo</span><span><a href="guia-web.html" target="_blank" rel="noopener noreferrer" style="color:inherit;text-underline-offset:3px">Guardar y trasladar carreras · Guía web</a> · <a href="creditos.html" target="_blank" rel="noopener noreferrer" style="color:inherit;text-underline-offset:3px">Créditos</a></span></footer>
+  </div>
+  <dialog id="modal"><div id="modal-body"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <input id="import-file" type="file" accept="application/json,.json" hidden>
+  <script src="bands.js?v=1.2.3-god-fame"></script>
+  <script src="taxes.js?v=1.2.3-god-fame"></script>
+  <script src="marketing-model.js?v=1.2.3-god-fame"></script>
+  <script src="marketing-campaign.js?v=1.2.3-god-fame"></script>
+  <script src="ppv-marketing.js?v=1.2.3-god-fame"></script>
+  <script src="album-campaign.js?v=1.2.3-god-fame"></script>
+  <script src="career-arcs.js?v=1.2.3-god-fame"></script>
+  <script src="career-commitments.js?v=1.2.3-god-fame"></script>
+  <script src="creative-direction.js?v=1.2.3-god-fame"></script>
+  <script src="show-setlist.js?v=1.2.3-god-fame"></script>
+  <script src="career-momentum.js?v=1.2.3-god-fame"></script>
+  <script src="daily-agenda.js?v=1.2.3-god-fame"></script>
+  <script src="territories.js?v=1.2.3-god-fame"></script>
+  <script src="enterprise.js?v=1.2.3-god-fame"></script>
+  <script src="engine.js?v=1.2.3-god-fame"></script>
+  <script src="art.js?v=1.2.3-god-fame"></script>
+  <script src="universe.js?v=1.2.3-god-fame"></script>
+  <script src="charts-view.js?v=1.2.3-god-fame"></script>
+  <script src="world.js?v=1.2.3-god-fame"></script>
+  <script src="scene.js?v=1.2.3-god-fame"></script>
+  <script src="music-lab.js?v=1.2.3-god-fame"></script>
+  <script src="continuity.js?v=1.2.3-god-fame"></script>
+  <script src="character-art.js?v=1.2.3-god-fame"></script>
+  <script src="career-story.js?v=1.2.3-god-fame"></script>
+  <script src="career-journey-view.js?v=1.2.3-god-fame"></script>
+  <script src="themes.js?v=1.2.3-god-fame"></script>
+  <script src="creator.js?v=1.2.3-god-fame"></script>
+  <script src="simulation-clock.js?v=1.2.3-god-fame"></script>
+  <script src="sales-view.js?v=1.2.3-god-fame"></script>
+  <script src="activity-actor.js?v=1.2.3-god-fame"></script>
+  <script src="object-art.js?v=1.2.3-god-fame"></script>
+  <script src="owned-scenery.js?v=1.2.3-god-fame"></script>
+  <script src="activity-scene.js?v=1.2.3-god-fame"></script>
+  <script src="industry-view.js?v=1.2.3-god-fame"></script>
+  <script src="cockpit-view.js?v=1.2.3-god-fame"></script>
+  <script src="bands-view.js?v=1.2.3-god-fame"></script>
+  <script src="management-view.js?v=1.2.3-god-fame"></script>
+  <script src="manager-cockpit.js?v=1.2.3-god-fame"></script>
+  <script src="operations-view.js?v=1.2.3-god-fame"></script>
+  <script src="wardrobe-view.js?v=1.2.3-god-fame"></script>
+  <script src="jobs-view.js?v=1.2.3-god-fame"></script>
+  <script src="weekly-routine.js?v=1.2.3-god-fame"></script>
+  <script src="taxes-view.js?v=1.2.3-god-fame"></script>
+  <script src="collaboration-view.js?v=1.2.3-god-fame"></script>
+  <script src="album-view.js?v=1.2.3-god-fame"></script>
+  <script src="marketing-view.js?v=1.2.3-god-fame"></script>
+  <script src="live-dom.js?v=1.2.3-god-fame"></script>
+  <script src="live-career-view.js?v=1.2.3-god-fame"></script>
+  <script src="territories-view.js?v=1.2.3-god-fame"></script>
+  <script src="enterprise-view.js?v=1.2.3-god-fame"></script>
+  <script src="patrimony-view.js?v=1.2.3-god-fame"></script>
+  <script src="app.js?v=1.2.3-god-fame"></script>
+</body>
+</html>

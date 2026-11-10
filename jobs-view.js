@@ -1,0 +1,10 @@
+(function(root){
+ 'use strict';
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const button=(label,type,payload)=>`<button class="outline small" data-act="${type}" data-payload="${esc(JSON.stringify(payload))}">${esc(label)}</button>`;
+ function render(s){
+  const jobs=root.RapEngine?.catalog.jobs||[],active=s.employment?.status==='active'&&jobs.find(j=>j.id===s.employment.id),turns=(s.plan||[]).filter(p=>p.id==='employment_shift').length;
+  return `<section class="panel jobs-panel" aria-label="Trabajo flexible"><div class="panel-title"><h2>Trabajo y turnos</h2><span>${active?'Empleo activo':'Sin empleo fijo'}</span></div>${active?`<div class="finance-line"><div><strong>${esc(active.name)}</strong><small>$${active.wage} por turno · ${active.energy} energía · ${turns} en agenda</small></div><div class="jobs-actions">${button('Añadir turno','plan',{id:'employment_shift'})} ${button('Dejar empleo','employment',{decision:'leave'})}</div></div><details id="jobs-conditions" class="jobs-details"><summary>Condiciones e historial del empleo</summary><p>Completados: ${s.employment.shiftsCompleted} · cobrado: $${s.employment.totalEarned}</p><p>Retira los turnos programados antes de dejar el empleo. Si falta energía al ejecutar, el turno se omite sin cobro.</p></details>`:`<details id="jobs-vacancies" class="jobs-details"><summary>Buscar empleo · ${jobs.length} puestos disponibles</summary><p>Acepta un empleo y elige cada turno. Solo cobras y gastas energía cuando lo completas; no se reservan turnos automáticamente.</p><div class="grid-3">${jobs.map(job=>`<article class="card"><div class="card-body"><h3>${esc(job.name)}</h3><p>${esc(job.desc)}</p><p><strong>$${job.wage}</strong> por turno · ${job.energy} energía</p>${button('Aceptar empleo','employment',{decision:'accept',id:job.id})}</div></article>`).join('')}</div></details>`}</section>`;
+ }
+ root.RapJobsView={render};if(typeof module!=='undefined'&&module.exports)module.exports={render};
+})(typeof globalThis!=='undefined'?globalThis:this);

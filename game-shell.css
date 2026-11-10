@@ -1,0 +1,39 @@
+/* Transport controls and the studio rack share the same physical materials. */
+:root{--rack:#202b32;--rack-edge:#536164;--rack-glass:#101c22;--rack-text:#d9e1d9;--rack-light:#dfb66c}
+body[data-genre=rock]{--rack:#302b29;--rack-edge:#71635a;--rack-glass:#201c1a;--rack-light:#e1ad7c}
+body[data-genre=reggae]{--rack:#29342b;--rack-edge:#69765b;--rack-glass:#14231b;--rack-light:#e3c474}
+body[data-genre=pop]{--rack:#302d3d;--rack-edge:#716d8b;--rack-glass:#211c30;--rack-light:#e6b5d5}
+body[data-genre=metal]{--rack:#282b2c;--rack-edge:#66696a;--rack-glass:#15191c;--rack-light:#d99783}
+body{background-color:#151b20;background-image:radial-gradient(ellipse at 38% 0%,#4b575d26,transparent 70%),repeating-linear-gradient(0deg,#0001 0 1px,transparent 1px 4px);color:var(--rack-text)}
+.topbar{background:linear-gradient(180deg,#48505630,transparent 45%),var(--rack);border-bottom:1px solid #10191d;box-shadow:inset 0 1px #ffffff18,0 2px 8px #0005;color:var(--rack-text)}
+.topbar .breadcrumb,.topbar .breadcrumb strong{color:#c6d0d0}.topbar .breadcrumb span{color:#8a9699}
+.topbar .outline,.topbar .icon-btn{border-color:var(--rack-edge);border-radius:3px;color:#d8dfdb;background:linear-gradient(#ffffff08,#0002)}
+.topbar .week-badge{color:var(--rack-light);font-variant-numeric:tabular-nums}
+.simulation-clock{background:linear-gradient(180deg,#ffffff0a,#0001 55%,#0003),var(--rack);border-bottom:2px solid #080f13;box-shadow:inset 0 -1px var(--rack-edge);color:var(--rack-text)}
+.clock-date strong{color:#e0e1d7}.clock-date small{color:#a4b0af}.clock-day-sheet{background:var(--rack-glass);color:var(--rack-light);border:1px solid #5d6969;border-top:3px solid #3b464b;box-shadow:inset 0 2px 5px #000b,0 1px #ffffff18;border-radius:2px;text-shadow:0 0 10px #f6c17420}
+.clock-controls button{background:linear-gradient(#57636a,#323d43);border:1px solid #758082;border-bottom:3px solid #0d171c;color:#dfe4e1;box-shadow:inset 0 1px #ffffff21,0 2px 3px #0005;border-radius:3px;min-height:33px}
+.clock-controls .clock-play{background:linear-gradient(#e2c08c,#ac874f);border-color:#f0cc91;border-bottom-color:#63523a;color:#241d17;font-weight:700}
+.clock-controls button[aria-pressed=true]{background:linear-gradient(#273937,#1b2a2b);color:#e4c78d;border-color:#849888;border-bottom-color:#111f20;box-shadow:inset 0 1px 5px #000b,0 0 7px #e3bd5a14}
+.clock-controls button:hover:not(:disabled){filter:brightness(1.17)}.clock-controls button:active:not(:disabled){box-shadow:inset 0 2px 4px #0006;transform:translateY(1px)}
+.clock-speed-label{color:#a6b4b6}.clock-status{color:#c6bc9e}.clock-status.is-playing{color:#b7d7bb}
+.sidebar{background:linear-gradient(#52606733,transparent 25%),var(--rack);border-top:1px solid #69767a;box-shadow:0 -1px 0 #080f14,0 -7px 20px #0006;padding-top:3px}
+.sidebar nav{gap:3px}.sidebar nav button{border:1px solid transparent;border-radius:3px;color:#b6c0c0;min-height:66px;position:relative;background:transparent}
+.sidebar nav button:hover{background:#ffffff08;color:#e8ece2;border-color:#7e888438}
+.sidebar nav button.active{color:var(--rack-light);background:linear-gradient(#7885832b,#06121877);border-color:#78877e;box-shadow:inset 0 1px #ffffff22,inset 0 -3px var(--rack-light),0 3px 5px #0005}
+.sidebar nav button .nav-icon{filter:drop-shadow(0 2px 1px #0009)}.sidebar nav button.active .nav-icon{filter:drop-shadow(0 0 4px #e9ba6744)}
+.sidebar .brand{color:var(--rack-text)}.sidebar .brand-mark{color:var(--rack-light)}
+dialog{background:var(--rack);color:#dce2df;border:1px solid #7b8888;border-top:4px solid #b5a17a;border-radius:5px;box-shadow:inset 0 0 0 4px #131e23,0 22px 65px #000a}
+dialog::backdrop{background:#080d14c9;backdrop-filter:none}
+.modal-header{background:linear-gradient(#ffffff0d,#0002),var(--rack);border-bottom:1px solid #72807950;padding:20px 25px}
+.modal-header h2{color:#e4d9be}.modal-close{color:#d3dcd7}.modal-content p,.modal-content .note,.save-option p{color:#bdc8c6}
+.modal-content .field{color:#d0d9d3}.modal-content input,.modal-content select,.modal-content textarea{background:var(--rack-glass);border:1px solid #667570;color:#e0e6e0;box-shadow:inset 0 2px 3px #0004;border-radius:3px}
+.modal-content input::placeholder,.modal-content textarea::placeholder{color:#9caaa7}.modal-content .outline{border-color:#879388;color:#dce2d8;background:#101c2222}
+.modal-content .btn{background:linear-gradient(#dec596,#b89360);color:#241e18;border:1px solid #b8a17b;border-bottom:3px solid #6c5841}
+.modal-content .finance-line{border-color:#6b77754d;color:#d3ddd5}.modal-content .finance-line small{color:#a8b7b3}.modal-content .finance-line strong{color:#ead3a2}
+.modal-content .save-option{border-color:#64746d}.modal-content .save-option h3{color:#dfd8bc}.modal-content .table-wrap{background:#e5ddcd;color:#332d2a}
+.modal-content label input[type=checkbox]{accent-color:#ccab6d}.modal-content .group-project-choice{color:#d2dbd5}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #9ec9c6;outline-offset:3px}
+#toast{background:#1b2930;border-color:#778582;color:#e1e7e0;box-shadow:0 8px 30px #0006}
+@media(min-width:901px){body[data-screen=central] .app{padding-bottom:90px}}
+@media(max-width:700px){.sidebar nav button{min-height:58px}.clock-controls button{min-height:36px}.clock-day-sheet{flex-shrink:0}.modal-header{padding:17px 20px}}
+@media(prefers-reduced-motion:reduce){.clock-controls button:active:not(:disabled){transform:none}}

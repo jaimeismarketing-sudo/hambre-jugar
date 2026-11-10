@@ -1,0 +1,85 @@
+/* Seven destinations keep the controller-like game bar readable at desktop size.
+   Subsections stay on the page, retaining the existing navigable hashes. */
+.sidebar #nav{display:flex;flex:1 1 auto;min-width:0;justify-content:center;overflow-x:auto;overflow-y:hidden;gap:3px}
+.sidebar #nav button{flex:1 1 0;min-width:0;max-width:145px;padding:6px 4px;white-space:normal;line-height:1.15;font-size:11px}
+.sidebar #nav button:first-child,.sidebar #nav button:last-child{margin:0}
+.sidebar #nav .nav-label{display:block;max-width:100%;overflow-wrap:anywhere;text-align:center}
+.sidebar #nav .badge-count{position:absolute;right:4px;top:3px;margin:0;font-size:10px}
+.sidebar #nav button:focus-visible,.hub-subnav button:focus-visible{outline:3px solid var(--game-accent,#e2b06e);outline-offset:-3px}
+.hub-subnav{display:flex;flex-direction:row;flex-wrap:wrap;align-items:stretch;gap:5px;padding:0 0 12px;margin:0 0 17px;border-bottom:1px solid var(--line,#5a5c60)}
+.hub-subnav button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 14px;background:#172630;color:#e6e0d4;border:1px solid #53656a;border-radius:3px;font:600 12px/1.2 var(--body,sans-serif);white-space:normal;text-align:center}
+.hub-subnav button:hover{background:#31434a;color:#fff}
+.hub-subnav button.active{background:var(--game-accent,#d8ae76);border-color:var(--game-accent,#d8ae76);color:#15252b;box-shadow:inset 0 -2px #0004}
+.event-choice{display:flex;flex-direction:column;align-items:flex-start;gap:5px;max-width:300px}
+.event-choice small{font-size:11px;line-height:1.4;color:inherit;opacity:.85}
+/* The studio starts with production; these controls jump to tools on the same screen. */
+.studio-index{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:7px;margin:0 0 22px;padding:0 0 16px;border-bottom:1px solid var(--theme-edge,#53656a)}
+.studio-index button{width:auto;flex:0 1 auto;min-height:38px;white-space:normal;text-align:left}
+[id^=studio-]{scroll-margin-top:calc(var(--clock-height,110px) + 18px)}
+[id^=studio-]:focus{outline:2px solid var(--game-accent,#d8ae76);outline-offset:5px}
+.studio-roster{margin-top:24px}.studio-roster>.panel{margin-top:14px}
+.studio-client-project{padding:13px 0;border-top:1px solid var(--theme-edge,#53656a)}
+.studio-client-project>strong{font-size:15px;overflow-wrap:anywhere}.studio-client-project p{font-size:12px;line-height:1.7;margin:6px 0}
+.studio-section{border-top:1px solid var(--theme-edge,#53656a);margin-top:22px;min-width:0}
+.studio-section>summary{cursor:pointer;padding:17px 3px;line-height:1.5;color:var(--theme-text,var(--game-text,#e9dfd2))}
+.studio-section>summary strong{font:600 24px var(--display,sans-serif);margin-right:16px}
+.studio-section>summary span{font-size:12px;color:var(--theme-muted,#bdc5ce)}
+.studio-section>summary:focus-visible,.studio-index button:focus-visible{outline:3px solid var(--game-accent,#d8ae76);outline-offset:3px}
+.studio-section-body{padding-bottom:10px}.studio-section-body>.album-release-desk,.studio-section-body>.media-desk{border-top:0;padding-top:0;margin-top:0}
+.studio-catalog-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.studio-catalog-row{display:flex;align-items:flex-start;padding:16px;gap:16px;border:1px solid var(--theme-edge,#53656a);background:var(--theme-panel,#14232e);color:var(--theme-text,#eee9df);min-width:0}
+.studio-catalog-row .cover{width:76px;height:76px;flex:0 0 76px}.studio-catalog-row>div:last-child{min-width:0}
+.studio-catalog-row h3{font-size:23px;line-height:1.2;color:var(--theme-text,#eee9df);overflow-wrap:anywhere}
+.studio-catalog-row p,.studio-catalog-row small{font-size:12px;line-height:1.65;color:var(--theme-muted,#bdc5ce);overflow-wrap:anywhere}
+.studio-catalog-row .card-actions{margin-top:10px}.studio-catalog-row button{min-height:36px}
+.report-owner-note{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 18px;margin:0 0 22px;border:1px solid var(--theme-edge,#53656a);background:var(--theme-raised,#243744);color:var(--theme-text,#eee9df)}
+.report-owner-note strong{font-size:14px}.report-owner-note p{font-size:12px;line-height:1.6;margin:5px 0 0;max-width:75ch;color:var(--theme-muted,#bdc5ce)}.report-owner-note button{min-height:38px;flex-shrink:0}
+.living-budget{min-width:0;border:1px solid var(--theme-edge,#53656a);padding:14px;margin:0 0 18px}.living-budget legend{padding:0 7px;font-size:14px;font-weight:600}
+.living-budget-options{display:flex;flex-direction:row;flex-wrap:wrap;gap:9px}.living-budget-options button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;flex:1 1 170px;min-height:56px;padding:10px;text-align:left;white-space:normal}.living-budget-options strong,.living-budget-options small{display:block;line-height:1.6}.living-budget-options strong{font-size:13px}.living-budget-options small{font-size:11px;color:inherit;opacity:.9}
+.living-budget-options button[aria-pressed=true]{background:var(--game-accent,#d8ae76);color:var(--game-ink,#17232c);border-color:var(--game-accent,#d8ae76)}.living-budget-options button:focus-visible{outline:3px solid var(--game-accent,#d8ae76);outline-offset:3px}.living-budget p{font-size:12px;line-height:1.75;margin:12px 0 0}.living-budget button:disabled{cursor:not-allowed;opacity:.55}
+@media(max-width:1000px){.studio-catalog-list{grid-template-columns:1fr}.studio-section>summary span{display:block;margin-top:5px}}
+@media(max-width:650px){.studio-index button{flex:1 1 140px}.studio-catalog-row{padding:13px;gap:12px}.studio-catalog-row .cover{width:64px;height:64px;flex-basis:64px}.report-owner-note{display:block}.report-owner-note button{margin-top:12px}}
+/* The biography is a light paper insert. The genre theme sets headings to
+   white, so keep this heading with its own dark ink. */
+body[data-visual-theme] .artist-biography h2{color:#28333b}
+.live-page-heading p{color:var(--theme-muted,#bdc5ce);font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+/* This is an index within one screen, not another set of pages. It exposes
+   staff and operations without forcing a trip through the whole asset shop. */
+.wealth-index{position:sticky;top:var(--clock-height,110px);z-index:8;display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;margin:0 0 20px;padding:12px;background:var(--theme-panel,#14232e);border:1px solid var(--theme-edge,#53656a);box-shadow:0 4px 10px #0003}
+.wealth-index strong{flex:0 0 100%;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--theme-muted,#bdc5ce)}
+.wealth-index button{width:auto;flex:0 1 auto;padding:8px 11px;min-height:36px;border:1px solid var(--theme-edge,#53656a);border-radius:3px;background:var(--theme-raised,#243744);color:var(--theme-text,#eee9df);font:600 12px/1.2 var(--body,sans-serif)}
+.wealth-index button:hover{border-color:var(--game-accent,#d8ae76)}
+.wealth-index button:focus-visible{outline:3px solid var(--game-accent,#d8ae76);outline-offset:2px}
+[id^=wealth-]{scroll-margin-top:145px}
+[id^=wealth-]:focus{outline:2px solid var(--game-accent,#d8ae76);outline-offset:5px}
+.table-wrap:focus-visible{outline:3px solid var(--game-accent,#d8ae76);outline-offset:3px}
+.jobs-panel{margin:0 0 20px;padding:14px 18px}
+.jobs-panel .panel-title{margin-bottom:8px}
+.jobs-panel h2{font-size:22px}
+.jobs-details{font-size:12px;line-height:1.6}
+.jobs-details summary{width:fit-content;cursor:pointer;color:var(--theme-text,#eee9df);padding:5px 0;min-height:32px}
+.jobs-details summary:focus-visible{outline:3px solid var(--game-accent,#d8ae76);outline-offset:3px}
+.jobs-details[open]>p{margin:9px 0 14px;color:var(--theme-muted,#bdc5ce)}
+.jobs-actions{display:flex;gap:6px;flex-wrap:wrap;align-content:start;justify-content:flex-end}
+.operation-card{min-width:0;margin-top:18px;padding:18px;border:1px solid var(--theme-edge,#53656a);background:var(--theme-panel,#14232e)}
+.operation-card h3{overflow-wrap:anywhere;font-size:24px;line-height:1.15}
+.operation-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0;font-size:12px;line-height:1.5}
+.operation-meta>div{min-width:0}
+.operation-meta strong,.operation-meta b{display:block;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.operation-meta small{font-size:11px;color:var(--theme-muted,#bdc5ce)}
+.operation-choices{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.operation-choices button{min-height:36px}
+.asset-trend{display:block;width:100%;max-width:100%;height:auto;margin:14px 0}
+.asset-trend svg{display:block;width:100%;height:auto}
+.operation-card .finance-line{flex-wrap:wrap}
+@media(max-width:700px){.wealth-index{gap:5px;padding:9px}.wealth-index button{padding:7px 9px;font-size:11px}[id^=wealth-]{scroll-margin-top:190px}}
+/* Financial labels and chart method text must not shrink to 7–8 px. Let the
+   direction booth grow vertically instead of clipping its information. */
+.manager-cockpit{height:auto;max-height:none;grid-template-rows:auto minmax(235px,1fr) minmax(300px,auto)}
+.mc-graph-legend span,.mc-royalty-choice,.mc-royalty-choice select,.mc-graph-foot,.mc-settled,.mc-chart-foot,.mc-ranking-list small,.mc-ranking-list li>span:last-child small{font-size:10px;line-height:1.4}
+.mc-graph-foot,.mc-settled,.mc-chart-foot{flex-wrap:wrap}
+.mc-royalty-choice{height:auto;min-height:27px}
+@media(max-width:900px){.manager-cockpit{grid-template-rows:auto auto auto}.mc-performance{height:auto;min-height:330px}.mc-rankings{height:auto;min-height:310px}}
+@media(max-width:700px){.sidebar #nav{justify-content:space-between;gap:0}.sidebar #nav button{font-size:9px;padding:5px 1px;min-height:58px}.sidebar #nav .nav-icon{font-size:18px}.hub-subnav{margin-bottom:12px;gap:4px}.hub-subnav button{font-size:11px;padding:7px 9px;min-height:36px}}
+
+body[data-visual-theme] .living-budget-options button[aria-pressed=true] :is(strong,small){color:var(--game-ink,#17232c)}
