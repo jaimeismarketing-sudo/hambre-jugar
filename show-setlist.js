@@ -102,25 +102,48 @@
     return { demandMultiplier: demand / 10000, performanceBonus, energyCost };
   }
 
+  function migrateLegacyEmpty(s) {
+    // The optional quote represents an unselected repertoire as null. Normalize
+    // only that neutral sentinel on an otherwise ordinary show, never a broken
+    // snapshot or a different energy price. The engine calls this on a copy.
+    const items = [
+      ...(Array.isArray(s?.plan) ? s.plan : []),
+      ...(Array.isArray(s?.activeWeek?.lockedPlan) ? s.activeWeek.lockedPlan : []),
+      ...(Array.isArray(s?.agenda?.appointments) ? s.agenda.appointments.map(row => row?.item) : []),
+    ];
+    for (const item of items) if (item?.id === 'show' && item.energy === baseEnergy && item.setlist === null) delete item.setlist;
+  }
+
   function validate(s) {
     const errors = [];
     const day = s?.calendar?.day;
     const weekDay = s?.calendar?.dayOfWeek;
+    const hourly = s?.version === 4 && s.agenda?.mode === 'hourly';
+    function check(item, latestDay, earliestDay = 0) {
+      if (item?.setlist === undefined) return;
+      const setlist = item.setlist;
+      if (item.id !== 'show' || !validSnapshot(setlist) || setlist.bandId !== (item.bandTerms?.bandId ?? null)
+        || !count(latestDay) || setlist.bookedDay > latestDay || setlist.bookedDay < earliestDay
+        || item.energy !== effects(setlist).energyCost) errors.push('Repertorio de concierto guardado inválido.');
+    }
     const plans = [s?.plan, s?.activeWeek?.lockedPlan];
     for (const plan of plans) {
       if (!Array.isArray(plan)) continue;
-      for (const item of plan) {
-        if (item?.setlist === undefined) continue;
-        const setlist = item.setlist;
-        if (item.id !== 'show' || !validSnapshot(setlist) || setlist.bandId !== (item.bandTerms?.bandId ?? null)
-          || !count(day) || setlist.bookedDay > day || (count(weekDay) && setlist.bookedDay < day - weekDay)
-          || item.energy !== effects(setlist).energyCost) errors.push('Repertorio de concierto guardado inválido.');
+      // Hourly bookings may have been agreed weeks before their performance.
+      for (const item of plan) check(item, day, !hourly && count(weekDay) ? day - weekDay : 0);
+    }
+    if (Array.isArray(s?.agenda?.appointments)) {
+      // Future and completed appointments also retain binding repertoire terms;
+      // they must be checked even when absent from this week's displayed plan.
+      for (const row of s.agenda.appointments) {
+        if (row?.item?.setlist === undefined) continue;
+        check(row.item, Math.min(day, Math.floor(row.startMinute / 1440)));
       }
     }
     return errors;
   }
 
-  const api = { maxWorks, available, quote, effects, validate };
+  const api = { maxWorks, available, quote, effects, validate, validSnapshot, migrateLegacyEmpty };
   root.RapShowSetlist = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

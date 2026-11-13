@@ -188,7 +188,7 @@
   function repertoireOptions(s, bandId) {
     const library = root.RapShowSetlist;
     const works = library.available(s, { bandId });
-    if (!works.length) return '<p>El repertorio personalizado se abre cuando publiques una obra para esta formación.</p>';
+    if (!works.length) return '<p>No tienes obras publicadas para seleccionar. Puedes actuar sin un repertorio personalizado.</p>';
     const options = works.map(work => `<option value="${escape(work.releaseId)}">${escape(work.name)} · ${escape(work.kindName)}</option>`).join('');
     return `<div class="journey-setlist-picks">${Array.from({ length: Math.min(library.maxWorks, works.length) }, (_, slot) =>
       `<label class="field">Obra ${slot + 1}<select name="repertoire"><option value="">Sin elegir</option>${options}</select></label>`
@@ -217,14 +217,17 @@
     }
     const releaseIds = [...picks.querySelectorAll('select')].map(select => select.value).filter(Boolean);
     const quote = library.quote(s, { releaseIds, bandId });
+    const submit = form.querySelector('button[type="submit"]');
+    if (submit) submit.disabled = !quote.ok;
     if (!quote.ok) {
       readout.textContent = quote.message;
-      return;
+      return quote;
     }
     const effects = library.effects(quote.setlist);
     readout.textContent = quote.setlist
       ? percentage(effects.demandMultiplier) + ' demanda estimada · +' + effects.performanceBonus + ' actuación · ' + effects.energyCost + ' de energía'
       : 'Repertorio habitual · 32 de energía';
+    return quote;
   }
 
   root.RapCareerJourneyView = { tape, render, creativeFields, briefTag, audience, setlistFields, syncSetlist };

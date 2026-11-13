@@ -1112,15 +1112,34 @@
   function prepareAgendaItem(s,p){
     const shadow=copy(s);shadow.activeWeek=null;shadow.plan=[];shadow.version=3;delete shadow.agenda;
     const id=p.actionId||p.id;let r;
+    const previousShow=id==='show'&&p.appointmentId!==undefined?s.agenda?.appointments.find(a=>a.id===p.appointmentId&&a.actionId==='show'&&a.status==='scheduled'):null;
+    const preserveShowGroup=previousShow&&!Object.hasOwn(p,'group');
     const usesRoom=['record','produce','collab','band_rehearsal','management_record'].includes(id),options=usesRoom?agendaResources(s,p.actorId||p.artistId||'player'):[],resource=usesRoom?options.find(r=>r.id===(p.resourceId||options[0]?.id)):null;
     if(usesRoom&&!resource)return{ok:false,message:'El estudio ya no está disponible o está operado como negocio. Elige otra sala.'};
     if(resource&&!resource.owned)shadow.assets=shadow.assets.filter(a=>find(catalog.investments,a.catalogId)?.bonus!=='studio');
     if(p.actorId&&p.actorId!=='player'&&!String(id).startsWith('management_')&&!['rest','album_video_shoot'].includes(id))return{ok:false,message:'Elige una actividad de cliente para ese artista.'};
-    if(id==='show')r=actCore(shadow,'book',p);
+    if(id==='show')r=actCore(shadow,'book',preserveShowGroup?{...p,setlistReleaseIds:[]}:p);
     else if(String(id).startsWith('management_'))r=actCore(shadow,'management',{...p,supervised:p.supervised===true,decision:'plan',artistId:p.actorId||p.artistId,activity:id.replace('management_','')});
     else if(id==='album_video_shoot')r=actCore(shadow,'musicVideo',{...p,decision:'plan'});
     else r=planItem(shadow,id,p,['band_rehearsal','band_audition'].includes(id));
     if(!r.ok)return r;const item=shadow.plan.at(-1);if(!item)return{ok:false,message:'No se encontró la actividad que se va a programar.'};
+    if(preserveShowGroup){
+      // Date, venue and price edits keep the agreed snapshot, including removed
+      // catalogue works and group splits. An empty selection clears only songs.
+      if(item.venueId===previousShow.item.venueId&&item.marketId===previousShow.item.marketId){
+        for(const key of ['cost','travelCost','venueName','venueLabel','venueCity','label'])if(Object.hasOwn(previousShow.item,key))item[key]=previousShow.item[key];
+      }
+      if(previousShow.item.bandTerms)item.bandTerms=copy(previousShow.item.bandTerms);
+      if(Object.hasOwn(p,'setlistReleaseIds')){
+        const quoted=setlistSystem()?.quote(s,{releaseIds:p.setlistReleaseIds,bandId:item.bandTerms?.bandId??null});
+        if(quoted?.ok===false)return quoted;
+        if(quoted?.setlist){item.setlist=quoted.setlist;item.energy=setlistSystem().effects(item.setlist).energyCost;}
+      }else if(previousShow.item.setlist!==undefined){
+        const saved=previousShow.item.setlist;
+        if(!setlistSystem()?.validSnapshot(saved)||saved.bandId!==(item.bandTerms?.bandId??null)||saved.bookedDay>s.calendar.day||previousShow.item.energy!==setlistSystem().effects(saved).energyCost)return{ok:false,message:'El repertorio reservado necesita revisión antes de editar esta cita.'};
+        item.setlist=copy(saved);item.energy=setlistSystem().effects(saved).energyCost;
+      }
+    }
     if(resource){item.resourceId=resource.id;item.facilityOwned=resource.owned;item.facilityName=resource.name;if(resource.enterpriseAssetId){item.enterpriseAssetId=resource.enterpriseAssetId;if(id==='record')item.cost=money(find(catalog.actions,id).cost*.45);}}
     let clientCost=0;if(item.artistId&&item.id.startsWith('management_')){item.supervised=p.supervised===true;const status=managementActionStatus(shadow,item);clientCost=status.artistCost||0;if(!item.supervised)item.cost=0;}
     if(id==='rest'&&p.actorId&&p.actorId!=='player'){item.artistId=p.actorId;item.supervised=false;clientCost=item.cost;item.cost=0;}
@@ -2907,6 +2926,7 @@
     compactSettledReceipts(s);
     if (s.calendar && Array.isArray(s.releases)) { ensureIndustry(s); ensureCommerce(s); ensureManagement(s); bandSystem()?.ensure(s); }
     compactManagementTracking(s);
+    setlistSystem()?.migrateLegacyEmpty(s);
     const check = validateSave(s);
     if (!check.ok) throw new Error('Partida inválida: ' + check.errors[0]);
     return s;

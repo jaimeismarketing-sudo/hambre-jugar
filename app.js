@@ -405,6 +405,7 @@ function bookModal(id){
  ${market}${groupChoice('show')}${globalThis.RapCareerJourneyView?.setlistFields(s)||''}</div>
  <p class="note">Reservar ocupa una acción. Las entradas se venden al ejecutar el concierto. Viajar fuera de tu mercado puede sumar costes.</p>
  <div class="form-actions">${btn('Volver','type="button" data-ui="close"','outline')}${btn('Añadir al plan','type="submit"')}</div></form>`);
+ globalThis.RapCareerJourneyView?.syncSetlist(s,$('#modal form[data-form="book"]'));
 }
 function loansModal(){modal('El crédito también pesa.',`<p>Recibes caja y asumes una obligación. Las cuotas combinan capital e interés; el impago perjudica tu reputación y puede bloquear financiación.</p>${E.catalog.loans.map(l=>`<div class="contract"><h3>${esc(l.name)}</h3>${line('Capital',money(l.amount))}${line('Tasa anual del juego',fmt(l.apr*100)+'%')}${line('Plazo',l.termWeeks+' semanas')}<p class="note">La disponibilidad depende de tu trayectoria, deuda y caja. Valores ficticios para la simulación.</p>${actionButton('loan',{id:l.id},'Solicitar '+money(l.amount),'outline wide section-gap')}</div>`).join('')}`);}
 function campaignStudioPanel(){
@@ -565,7 +566,7 @@ document.addEventListener('submit',ev=>{const form=ev.target.closest('form[data-
  case 'catalog-accept':if(run('catalogOffer',{decision:'accept',offerId:form.dataset.id}))closeModal();break;
  case 'deal-counter':if(run('deal',{decision:'counter',offerId:form.dataset.id,advance:Number(data.advance),share:Number(data.share)/100,duration:Number(data.duration)}))closeModal();break;
  case 'project':if(run('project',{name:data.name,type:data.type,group:data.group==='on',creativeBriefId:data.creativeBriefId||undefined})){closeModal();page='studio';location.hash=page;render();}break;
- case 'book':if(run('book',{venueId:form.dataset.id,ticketPrice:Number(data.ticketPrice),marketId:data.marketId,group:data.group==='on',setlistReleaseIds:new FormData(form).getAll('repertoire').filter(Boolean)}))closeModal();break;
+ case 'book':{const quote=globalThis.RapCareerJourneyView?.syncSetlist(s,form);if(quote?.ok===false){toast(quote.message);break;}if(run('book',{venueId:form.dataset.id,ticketPrice:Number(data.ticketPrice),marketId:data.marketId,group:data.group==='on',setlistReleaseIds:new FormData(form).getAll('repertoire').filter(Boolean)}))closeModal();break;}
  case 'campaign':if(run('campaign',{id:'ppv',mode:data.filmId==='new'?'create':'existing',filmId:data.filmId==='new'?undefined:data.filmId,showId:data.showId||undefined,name:data.name,price:Number(data.price),budget:Number(data.budget),duration:Number(data.duration),scope:data.scope||'latam',deluxeProjectId:data.deluxeProjectId||undefined}))closeModal();break;
  case 'note':{const note=String(data.note||'').trim().slice(0,3000);if(!note){toast('Escribe una nota antes de guardarla.');break;}s.history.unshift({week:s.week,title:'Nota de continuidad',text:note,kind:'nota'});if(s.history.length>520)s.history.length=520;const stored=persist();closeModal();toast(stored?'Nota guardada.':'Nota añadida en memoria. Exporta la carrera para conservarla.');break;}
  }});

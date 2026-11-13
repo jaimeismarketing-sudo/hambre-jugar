@@ -1,10 +1,10 @@
 {
   "product": "RAPPER SIM: HAMBRE",
-  "version": "1.2.4-save-recovery",
+  "version": "1.2.5-concert-fix",
   "target": "github-pages-static",
-  "sourceHash": "565944efdf37e6fcaa645a803d9547ca6d9fed1ce43782b57241a80436eaeee3",
+  "sourceHash": "e4e145815689cbe13f1fc6aaa42d5cf26fa8d4b1b53d098c83f89d5b4d53d741",
   "sourceFileCount": 91,
-  "sourceBytes": 2581786,
+  "sourceBytes": 2585029,
   "storage": "localStorage",
   "storageKey": "rapsim_hambre_v1",
   "serverRequired": false,
@@ -48,8 +48,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 155921,
-      "sha256": "3027fcd67f65b321c576bb92c0818898f955b7a1a7086ea215489df39e26850e"
+      "bytes": 156123,
+      "sha256": "66bd3a0e0de08f2b99707b49d05924377359b2b3934423f6852e67f65625687c"
     },
     {
       "path": "art.js",
@@ -83,8 +83,8 @@
     },
     {
       "path": "career-journey-view.js",
-      "bytes": 16220,
-      "sha256": "5905adc24cf0fc5d407473922800ac6384a5c5852e4ebe2688753ab32791cb4b"
+      "bytes": 16361,
+      "sha256": "f3cd4de5fe109d45b6af530a5f492259e241738c25e560212b599632725d69c8"
     },
     {
       "path": "career-journey.css",
@@ -163,8 +163,8 @@
     },
     {
       "path": "engine.js",
-      "bytes": 350389,
-      "sha256": "ebc4f631ce3c106f94bbf5bafdd15fff1705c97a11efcd8caae7a2314654a21c"
+      "bytes": 352094,
+      "sha256": "f4787dcfddb7ca3a6c4fa228aaf309d5984a4c88d531f1de1335b3e84ece7050"
     },
     {
       "path": "enterprise-view.css",
@@ -228,8 +228,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 8213,
-      "sha256": "6a419b633e54c540954025f3b7a3797fb007653258410157fc8f4e96bc43df91"
+      "bytes": 8055,
+      "sha256": "8ab1619552b71924a8a29c6c540a245201a95761d11ca5a2da974d2de87224c3"
     },
     {
       "path": "industry-view.css",
@@ -373,8 +373,8 @@
     },
     {
       "path": "show-setlist.js",
-      "bytes": 6436,
-      "sha256": "015dd1670a52324bb26b08a85753b194626058941e77b58712271806482c6173"
+      "bytes": 7789,
+      "sha256": "cb13913b21583ebac55fde5397add3d94c4e4dc81859d0ab58d5064947e89090"
     },
     {
       "path": "simulation-clock.js",
